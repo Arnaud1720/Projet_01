@@ -1,0 +1,49 @@
+version: "3.9"
+
+
+services:
+  postgres:
+    image: postgres:15
+    container_name: postgres_db
+    restart: always
+    environment:
+      POSTGRES_USER: Admin
+      POSTGRES_PASSWORD: Admin
+      POSTGRES_DB: dataBaseWeb
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  heimdall:
+    image: linuxserver/heimdall
+    container_name: heimdall
+    restart: always
+    ports:
+      - "8081:80"  # http
+      - "443:443"  # https
+    environment:
+      - PUID=1000  # ID utilisateur
+      - PGID=1000  # ID groupe
+      - TZ=Europe/Paris  # Remplacez par votre fuseau horaire
+    volumes:
+      - heimdall_data:/config
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com  # Utilisateur par défaut pour se connecter
+      PGADMIN_DEFAULT_PASSWORD: admin         # Mot de passe par défaut pour se connecter
+    ports:
+      - "8082:80"  # Port hôte : Port pgAdmin dans le conteneur
+    volumes:
+      - pgadmin_data:/var/lib/pgadmin
+    depends_on:
+      - postgres
+
+volumes:
+  postgres_data:
+  heimdall_data:
+  pgadmin_data:

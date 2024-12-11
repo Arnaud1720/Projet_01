@@ -1,0 +1,42 @@
+spring:
+  mail:
+    host: smtp.example.com
+    port: 587
+    username: monUtilisateur
+    password: monMotDePasse
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 10MB
+      max-request-size: 10MB
+  application:
+    name: api
+  docker:
+    compose:
+      enabled: false
+      file: api/compose.yaml
+  datasource:
+    url: jdbc:postgresql://localhost:5432/dataBaseWeb
+    username: Admin
+    password: Admin
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+springdoc:
+  swagger-ui:
+    enabled: true
+    path: /swagger-ui.html
+  api-docs:
+    path: /v3/api-docs
+
+app:
+  base-path: mnt/c/
+
