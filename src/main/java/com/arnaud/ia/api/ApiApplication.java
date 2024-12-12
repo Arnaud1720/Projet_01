@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.util.Scanner;
 
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = "com.arnaud.ia.api")
 public class ApiApplication {
 
 	public static void main(String[] args) {

@@ -5,6 +5,7 @@ import com.arnaud.ia.api.entity.Addresse;
 import com.arnaud.ia.api.entity.Roles;
 import com.arnaud.ia.api.entity.Utilisateurs;
 import com.arnaud.ia.api.exception.EmailAlreadyExistsException;
+import com.arnaud.ia.api.exception.UserNotFoundException;
 import com.arnaud.ia.api.mapper.AddresseMapper;
 import com.arnaud.ia.api.mapper.UtilisateursMapper;
 import com.arnaud.ia.api.repository.UtilisateurRepository;
@@ -63,5 +64,8 @@ public class UtilisateursService {
         utilisateursRepository.deleteById(id);
         return null;
     }
- 
+    public Utilisateurs findByEmail(String email) {
+        return utilisateursRepository.findByEmail(email)
+                .orElseThrow(() -> new UserNotFoundException("Utilisateur non trouvé avec l'email : " + email));
+    }
 }
