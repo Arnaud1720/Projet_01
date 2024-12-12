@@ -24,10 +24,16 @@ public class SecurityConfig {
         http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/auth/login", "/swagger-ui/**", "/v3/api-docs/**").permitAll()
-                        .anyRequest().authenticated()
+                        // Autoriser l'accès à /api/auth/login sans authentification
+                        .requestMatchers("/api/auth/login").permitAll()
+                        // Autoriser l'accès à la doc Swagger à tout le monde
+                        .requestMatchers("/swagger-ui/**", "/v3/api-docs/**").permitAll()
+                        // Tous les autres endpoints nécessitent le rôle Administrateur
+                        .anyRequest().hasRole("Administrateur")
                 )
+                // Ajouter le filtre JWT avant le UsernamePasswordAuthenticationFilter
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
+
         return http.build();
     }
 
