@@ -1,7 +1,7 @@
 # Documentation de l'API de Gestion des Frigos
 
 ## Description de l'API
-Cette API est une solution complète pour la gestion de **frigos**, conçue pour fonctionner dans un environnement sécurisé et conteneurisé. Elle permet aux administrateurs authentifiés de gérer des frigos via des endpoints protégés, de téléverser des fichiers XML contenant des informations sur les frigos, et d'enregistrer ces données en base de données. L'API est documentée et testable grâce à Swagger, et peut être facilement déployée avec Docker sur différents environnements.
+Cette API est une solution complète pour la gestion de **frigos**, conçue pour fonctionner dans un environnement sécurisé et conteneurisé. Elle permet aux administrateurs authentifiés de gérer des frigos via des endpoints protégés, de téléverser des fichiers xlsx contenant des informations sur les frigos, et d'enregistrer ces données en base de données. L'API est documentée et testable grâce à Swagger, et peut être facilement déployée avec Docker sur différents environnements.
 
 ---
 
@@ -17,8 +17,8 @@ L'API permet de gérer des frigos avec les attributs suivants :
 - **`temperatureActuelle`** : Température actuelle (en degrés Celsius).
 - **`temperatureCritique`** : Température critique à ne pas dépasser pour éviter les dommages.
 
-### Importation de données via XML
-- Téléversement de fichiers XML contenant des informations structurées sur les frigos.
+### Importation de données via XLSX
+- Téléversement de fichiers xlsx contenant des informations structurées sur les frigos.
 - Extraction, validation et enregistrement des données en base de données.
 - Gestion des erreurs pour les fichiers mal formés.
 
@@ -34,7 +34,7 @@ L'API permet de gérer des frigos avec les attributs suivants :
 ### Endpoints protégés (réservés aux administrateurs)
 - **`GET /api/frigos`** : Liste tous les frigos enregistrés en base.
 - **`POST /api/frigos`** : Ajoute un nouveau frigo en base de données.
-- **`POST /api/frigos/upload`** : Téléverse un fichier XML contenant des données sur les frigos pour les enregistrer en base.
+- **`POST /api/frigos/upload`** : Téléverse un fichier xlsx contenant des données sur les frigos pour les enregistrer en base.
 - **`DELETE /api/frigos/{id}`** : Supprime un frigo identifié par son ID.
 
 ### Sécurité
@@ -84,7 +84,7 @@ L'API permet de gérer des frigos avec les attributs suivants :
 - **Sécurité** :
    - **Spring Security** avec **JWT** pour l'authentification.
    - **BCrypt** pour le hachage des mots de passe.
-- **Téléchargement de fichiers** : Gestion des fichiers XML pour importer des données.
+- **Téléchargement de fichiers** : Gestion des fichiers xlsx pour importer des données.
 - **Documentation** : **Swagger UI** pour documenter et tester l'API.
 - **Conteneurisation** : **Docker** et **Docker Compose** pour le déploiement.
 
@@ -98,7 +98,7 @@ L'API permet de gérer des frigos avec les attributs suivants :
 
 ### Gestion des frigos
 - Un administrateur peut ajouter, modifier ou supprimer des frigos en base.
-- Les administrateurs peuvent également téléverser un fichier XML pour importer plusieurs frigos en une seule opération.
+- Les administrateurs peuvent également téléverser un fichier xlsx pour importer plusieurs frigos en une seule opération.
 
 ### Accès sécurisé
 - Les utilisateurs non authentifiés ou non autorisés (sans le rôle Administrateur) ne peuvent pas accéder aux endpoints protégés.
