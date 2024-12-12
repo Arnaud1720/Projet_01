@@ -18,5 +18,6 @@ public class CustomUserDetailsService {
                 .build();
 
         return new InMemoryUserDetailsManager(user);
+
     }
 }
